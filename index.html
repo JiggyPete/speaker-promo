@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
+    <style>
+
+      body {
+        font-family: 'Comfortaa';
+      }
+
+      .page {
+        margin: 3em;
+      }
+
+      table {
+        width: 800px;
+      }
+
+      input {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body class="page">
+    <h1>CFP Day Speaker Promo Generator</h1>
+    Example with URL params<a href="?name=HJ Chen&talk=Putting Together Your First Tech Talk&twitter=@hj_chen&picture=images/hj-chen.png">?name=HJ Chen&talk=Putting Together Your First Tech Talk&twitter=@hj_chen&conference=scotlandcss&picture=images/hj-chen.png</a>
+    <br/>
+    <br/>
+    <style type="text/css">@font-face {font-family: "Easycore"; src: url('/fonts/Easycore.ttf') format("truetype");}</style>
+    <br/>
+
+    Right click on the image below and select "Save As"
+    <br/>
+    <canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+    <br/>
+    <br/>
+    <table>
+      <tr>
+        <td>
+          <label>Name:</label>
+        </td>
+        <td>
+          <input type="text" id="name"></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Twitter:</label>
+        </td>
+        <td>
+          <input type="text" id="twitter"></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Talk title:</label>
+        </td>
+        <td>
+          <input type="text" id="talk"></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Load a square photo:</label>
+        </td>
+        <td>
+          <input type="file" id="picture"></input>
+        </td>
+      </tr>
+    </table>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="speaker.js"></script>
+    <script type="text/javascript" src="card_view.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+      let speaker = new Speaker()
+      let cardView = new CardView(speaker)
+
+      function getURLValue(key) {
+        var urlParams = new URL(window.location.href).searchParams
+        var result = urlParams.get(key)
+        if(result != null) {
+          return result
+        }
+
+        return ""
+      }
+
+      function initialiseFromURLParams(speaker) {
+        speaker.setName( getURLValue("name") )
+        speaker.setTalk( getURLValue("talk") )
+        speaker.setTwitter( getURLValue("twitter") )
+        speaker.setPicture( getURLValue("picture") )
+      }
+
+      function setupFormListeners(speaker) {
+        $( "#name" ).change(function(event) {
+          speaker.setName(event.target.value)
+        });
+
+        $( "#talk" ).change(function(event) {
+          speaker.setTalk(event.target.value)
+        });
+
+        $( "#twitter" ).change(function(event) {
+          speaker.setTwitter(event.target.value)
+        });
+      }
+
+      initialiseFromURLParams(speaker)
+      setupFormListeners(speaker)
+
+
+      if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+        alert('The File APIs are not fully supported in this browser.');
+      } else {
+
+        //this function is called when the input loads an image
+        function renderImage(file){
+          var reader = new FileReader();
+          reader.onload = function(event){
+            the_url = event.target.result
+            speaker.setPicture( the_url )
+          }
+
+          //when the file is read it triggers the onload event above.
+          reader.readAsDataURL(file);
+        }
+
+
+        //watch for change on the
+        $( "#picture" ).change(function() {
+          renderImage(this.files[0])
+        });
+      }
+    </script>
+  </body>
+</html>
