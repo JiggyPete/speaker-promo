@@ -42,7 +42,7 @@
 
     Right click on the image below and select "Save As"
     <br/>
-    <canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas" width="800" height="550" style="border:1px solid #d3d3d3;"></canvas>
     <br/>
     <br/>
     <table>
@@ -68,6 +68,21 @@
         </td>
         <td class="input-column">
           <input type="text" id="talk"></input>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">
+          <label>Continent:</label>
+        </td>
+        <td class="input-column">
+          <select id="continent">
+            <option>Australia / Oceania</option>
+            <option>Asia</option>
+            <option>Africa</option>
+            <option>Europe</option>
+            <option>North America</option>
+            <option>South America</option>
+          </select>
         </td>
       </tr>
       <tr>
@@ -232,6 +247,11 @@
         });
         $( "#twitter--y" ).change(function(event) {
           speaker.setTwitterY(event.target.value)
+        });
+
+        $( "#continent" ).change(function(event) {
+          value = event.target.selectedOptions[0].value
+          speaker.setContinent(value)
         });
 
       }

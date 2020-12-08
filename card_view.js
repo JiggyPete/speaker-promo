@@ -99,7 +99,11 @@ let CardView = class {
     context.font = '25px Comfortaa';
     context.fillStyle = this.cfpDayYellow
     context.fillText("global diversity CFP day", 40, 460);
-    context.fillText("@gdcfpday", 600, 460);
+    context.fillText("@gdcfpday", 600, 500);
+
+    context.font = '25px Comfortaa';
+    context.fillText(speaker.continent, 40, 500);
+
   }
 
   _canvas() {

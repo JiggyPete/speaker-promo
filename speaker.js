@@ -15,6 +15,8 @@ let Speaker = class {
     this.twitterX = "450"
     this.twitterY = "130"
 
+    this.continent = "Australia / Oceania"
+
     this.picture = picture;
     this.listener = null;
   }
@@ -76,6 +78,10 @@ let Speaker = class {
     this._notifyListener();
   }
 
+  setContinent(continent) {
+    this.continent = continent
+    this._notifyListener();
+  }
 
   setPicture(picture) {
     this.picture = picture
