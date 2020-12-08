@@ -1,23 +1,51 @@
 let Speaker = class {
   constructor(name, talk, twitter, picture) {
     this.name = name;
+
+    if(this.name == undefined) {
+      this.name = "Name here"
+    } else {
+      this.name = name;
+    }
     this.nameFontSize = "40px"
     this.nameX = "450"
     this.nameY = "90"
 
-    this.talk = talk;
+    if(this.talk == undefined) {
+      this.talk = "Talk title here"
+    } else {
+      this.talk = talk;
+    }
     this.talkFontSize = "20px"
     this.talkX = "450"
     this.talkY = "200"
 
-    this.twitter = twitter;
+    if(this.twitter == undefined) {
+      this.twitter = "Twitter here"
+    } else {
+      this.twitter = twitter;
+    }
     this.twitterFontSize = "25px"
     this.twitterX = "450"
     this.twitterY = "130"
 
     this.continent = "Australia / Oceania"
 
-    this.picture = picture;
+    this.startTimes = [
+      "- 09:00 AAA",
+      "- 12:00 BBB"
+    ]
+    this.startTimesFontSize = "25px"
+    this.startTimesX = "530"
+    this.startTimesY = "330"
+
+
+    if(this.picture == undefined) {
+      this.picture = "images/hj-chen.png"
+    } else {
+      this.picture = picture;
+    }
+
     this.listener = null;
   }
 
@@ -85,6 +113,23 @@ let Speaker = class {
 
   setPicture(picture) {
     this.picture = picture
+    this._notifyListener();
+  }
+
+  setStartTimes(startTimes) {
+    this.startTimes = startTimes.split("\n")
+    this._notifyListener();
+  }
+  setStartTimesFontSize(fontSize) {
+    this.startTimesFontSize = fontSize
+    this._notifyListener();
+  }
+  setStartTimesX(x) {
+    this.startTimesX = x
+    this._notifyListener();
+  }
+  setStartTimesY(y) {
+    this.startTimesY = y
     this._notifyListener();
   }
 

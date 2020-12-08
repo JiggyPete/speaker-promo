@@ -29,14 +29,16 @@
         width: 80%;
       }
 
+      #start-times {
+        height: 8em;
+      }
+
 
     </style>
   </head>
   <body class="page">
     <h1>CFP Day Speaker Promo Generator</h1>
-    Example with URL params<a href="?name=HJ Chen&talk=Putting Together Your First Tech Talk&twitter=@hj_chen&picture=images/hj-chen.png">?name=HJ Chen&talk=Putting Together Your First Tech Talk&twitter=@hj_chen&conference=scotlandcss&picture=images/hj-chen.png</a>
-    <br/>
-    <br/>
+</a>
     <style type="text/css">@font-face {font-family: "Easycore"; src: url('/fonts/Easycore.ttf') format("truetype");}</style>
     <br/>
 
@@ -48,7 +50,30 @@
     <table>
       <tr>
         <td class="label-column">
-          <label>Name:</label>
+          <label>Load a square photo:</label>
+        </td>
+        <td class="input-column">
+          <input type="file" id="picture"></input>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">
+          <label>Continent:</label>
+        </td>
+        <td class="input-column">
+          <select id="continent">
+            <option>Australia / Oceania</option>
+            <option>Asia</option>
+            <option>Africa</option>
+            <option>Europe</option>
+            <option>North America</option>
+            <option>Sudamerica</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">
+          <label>Speaker name:</label>
         </td>
         <td class="input-column">
           <input type="text" id="name"></input>
@@ -72,31 +97,18 @@
       </tr>
       <tr>
         <td class="label-column">
-          <label>Continent:</label>
+          <label>Start times:</label>
         </td>
         <td class="input-column">
-          <select id="continent">
-            <option>Australia / Oceania</option>
-            <option>Asia</option>
-            <option>Africa</option>
-            <option>Europe</option>
-            <option>North America</option>
-            <option>South America</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td class="label-column">
-          <label>Load a square photo:</label>
-        </td>
-        <td class="input-column">
-          <input type="file" id="picture"></input>
+          <textarea id="start-times" placeholder="- West most time & zone
+- Optional central time & zone
+- East most time & zone"></textarea>
         </td>
       </tr>
     </table>
     <br/>
 
-    <h2>Name properties</h2>
+    <h2>Speaker name properties</h2>
     <table>
       <tr>
         <td class="label-column">
@@ -182,106 +194,129 @@
 
     <br/>
 
+    <h2>Start time properties</h2>
+    <table>
+      <tr>
+        <td class="label-column">
+          <label>Font size:</label>
+        </td>
+        <td class="input-column">
+          <input id="start-times--font-size" type="text" placeholder="25px">
+        </td>
+      </tr>
+      <tr>
+        <td class="label-column">
+          <label>X:</label>
+        </td>
+        <td class="input-column">
+          <input id="start-times--x" type="NUMBER" min="0" step="1" value="530" size="6">
+        </td>
+      <tr>
+        <td class="label-column">
+          <label>Y:</label>
+        </td>
+        <td class="input-column">
+          <input id="start-times--y" type="NUMBER" min="0" step="1" value="330" size="6">
+        </td>
+      </tr>
+    </table>
+
+    <br/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="speaker.js"></script>
     <script type="text/javascript" src="card_view.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" rel="stylesheet" />
     <script type="text/javascript">
-      let speaker = new Speaker()
-      let cardView = new CardView(speaker)
+      $(document).ready(function() {
+        function setupFormListeners(speaker) {
+          $( "#name" ).change(function(event) {
+            speaker.setName(event.target.value)
+          });
+          $( "#name--font-size" ).change(function(event) {
+            speaker.setNameFontSize(event.target.value)
+          });
+          $( "#name--x" ).change(function(event) {
+            speaker.setNameX(event.target.value)
+          });
+          $( "#name--y" ).change(function(event) {
+            speaker.setNameY(event.target.value)
+          });
 
-      function getURLValue(key) {
-        var urlParams = new URL(window.location.href).searchParams
-        var result = urlParams.get(key)
-        if(result != null) {
-          return result
+          $( "#talk" ).change(function(event) {
+            speaker.setTalk(event.target.value)
+          });
+          $( "#talk--font-size" ).change(function(event) {
+            speaker.setTalkFontSize(event.target.value)
+          });
+          $( "#talk--x" ).change(function(event) {
+            speaker.setTalkX(event.target.value)
+          });
+          $( "#talk--y" ).change(function(event) {
+            speaker.setTalkY(event.target.value)
+          });
+
+
+          $( "#twitter" ).change(function(event) {
+            speaker.setTwitter(event.target.value)
+          });
+          $( "#twitter--font-size" ).change(function(event) {
+            speaker.setTwitterFontSize(event.target.value)
+          });
+          $( "#twitter--x" ).change(function(event) {
+            speaker.setTwitterX(event.target.value)
+          });
+          $( "#twitter--y" ).change(function(event) {
+            speaker.setTwitterY(event.target.value)
+          });
+
+          $( "#continent" ).change(function(event) {
+            value = event.target.selectedOptions[0].value
+            speaker.setContinent(value)
+          });
+
+          $( "#start-times" ).change(function(event) {
+            speaker.setStartTimes(event.target.value)
+          });
+          $( "#start-times--font-size" ).change(function(event) {
+            speaker.setStartTimesFontSize(event.target.value)
+          });
+          $( "#start-times--x" ).change(function(event) {
+            speaker.setStartTimesX(event.target.value)
+          });
+          $( "#start-times--y" ).change(function(event) {
+            speaker.setStartTimesY(event.target.value)
+          });
+
         }
 
-        return ""
-      }
+        if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+          alert('The File APIs are not fully supported in this browser.');
+        } else {
 
-      function initialiseFromURLParams(speaker) {
-        speaker.setName( getURLValue("name") )
-        speaker.setTalk( getURLValue("talk") )
-        speaker.setTwitter( getURLValue("twitter") )
-        speaker.setPicture( getURLValue("picture") )
-      }
+          //this function is called when the input loads an image
+          function renderImage(file){
+            var reader = new FileReader();
+            reader.onload = function(event){
+              the_url = event.target.result
+              speaker.setPicture( the_url )
+            }
 
-      function setupFormListeners(speaker) {
-        $( "#name" ).change(function(event) {
-          speaker.setName(event.target.value)
-        });
-        $( "#name--font-size" ).change(function(event) {
-          speaker.setNameFontSize(event.target.value)
-        });
-        $( "#name--x" ).change(function(event) {
-          speaker.setNameX(event.target.value)
-        });
-        $( "#name--y" ).change(function(event) {
-          speaker.setNameY(event.target.value)
-        });
-
-        $( "#talk" ).change(function(event) {
-          speaker.setTalk(event.target.value)
-        });
-        $( "#talk--font-size" ).change(function(event) {
-          speaker.setTalkFontSize(event.target.value)
-        });
-        $( "#talk--x" ).change(function(event) {
-          speaker.setTalkX(event.target.value)
-        });
-        $( "#talk--y" ).change(function(event) {
-          speaker.setTalkY(event.target.value)
-        });
-
-
-        $( "#twitter" ).change(function(event) {
-          speaker.setTwitter(event.target.value)
-        });
-        $( "#twitter--font-size" ).change(function(event) {
-          speaker.setTwitterFontSize(event.target.value)
-        });
-        $( "#twitter--x" ).change(function(event) {
-          speaker.setTwitterX(event.target.value)
-        });
-        $( "#twitter--y" ).change(function(event) {
-          speaker.setTwitterY(event.target.value)
-        });
-
-        $( "#continent" ).change(function(event) {
-          value = event.target.selectedOptions[0].value
-          speaker.setContinent(value)
-        });
-
-      }
-
-      initialiseFromURLParams(speaker)
-      setupFormListeners(speaker)
-
-
-      if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
-        alert('The File APIs are not fully supported in this browser.');
-      } else {
-
-        //this function is called when the input loads an image
-        function renderImage(file){
-          var reader = new FileReader();
-          reader.onload = function(event){
-            the_url = event.target.result
-            speaker.setPicture( the_url )
+            //when the file is read it triggers the onload event above.
+            reader.readAsDataURL(file);
           }
 
-          //when the file is read it triggers the onload event above.
-          reader.readAsDataURL(file);
+
+          //watch for change on the
+          $( "#picture" ).change(function() {
+            renderImage(this.files[0])
+          });
         }
 
-
-        //watch for change on the
-        $( "#picture" ).change(function() {
-          renderImage(this.files[0])
-        });
-      }
+        let speaker = new Speaker()
+        let cardView = new CardView(speaker)
+        setupFormListeners(speaker)
+      })
     </script>
   </body>
 </html>
