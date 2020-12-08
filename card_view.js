@@ -50,25 +50,32 @@ let CardView = class {
   }
 
   _drawName(name, context) {
-    context.font = "40px Comfortaa";
+    var x = parseInt(speaker.nameX)
+    var y = parseInt(speaker.nameY)
+
+    context.font = speaker.nameFontSize + " Comfortaa";
     context.letterSpacing = "100px"
     context.fillStyle = this.cfpDayYellow
-    context.fillText(name, this.rhsLeftPadding, 90);
+    context.fillText(name, x, y);
   }
 
   _drawTwitter(twitter, context) {
-    context.font = "25px Comfortaa";
+    var x = parseInt(speaker.twitterX)
+    var y = parseInt(speaker.twitterY)
+
+    context.font = speaker.twitterFontSize + " Comfortaa";
     context.fillStyle = "white"
-    context.fillText(twitter, this.rhsLeftPadding, 130);
+    context.fillText(twitter, x, y);
   }
 
   _drawTalk(talk, context) {
     var maxWidth = 300;
     var lineHeight = 25;
-    var x = this.rhsLeftPadding;
-    var y = 180;
 
-    context.font = '16pt Comfortaa';
+    var x = parseInt(speaker.talkX)
+    var y = parseInt(speaker.talkY)
+
+    context.font = speaker.talkFontSize + ' Comfortaa';
     context.fillStyle = 'white';
 
     this._wrapText(context, talk, x, y, maxWidth, lineHeight);
