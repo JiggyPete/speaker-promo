@@ -40,13 +40,19 @@ let Speaker = class {
     this.startTimesY = "330"
 
 
-    if(this.picture == undefined) {
-      this.picture = "images/hj-chen.png"
-    } else {
+    if(this.picture == undefined)
       this.picture = picture;
-    }
+
+    this.pictureURL = null //"images/hj-chen.png"
 
     this.listener = null;
+  }
+
+  profilePicture() {
+    if( this.picture != null && this.picture != undefined)
+      return this.picture
+
+    return this.pictureURL
   }
 
   addListener(listener) {
@@ -113,6 +119,11 @@ let Speaker = class {
 
   setPicture(picture) {
     this.picture = picture
+    this._notifyListener();
+  }
+
+  setPictureURL(pictureURL) {
+    this.pictureURL = pictureURL
     this._notifyListener();
   }
 

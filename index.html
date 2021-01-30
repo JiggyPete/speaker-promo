@@ -300,6 +300,9 @@
 
           speaker.startTimes = startTimes(continent)
 
+          var pictureURL = params.get("picture-url")
+          if(pictureURL != null)
+            speaker.setPictureURL(pictureURL)
 
           var name = params.get("name")
           if(name != null)

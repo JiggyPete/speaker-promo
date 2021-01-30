@@ -24,7 +24,7 @@ let CardView = class {
         context.imageSmoothingEnabled = true;
         context.drawImage(img, x, y, width, height);
     }
-    img.src = this.speaker.picture
+    img.src = filename
   }
 
   _wrapText(context, text, x, y, maxWidth, lineHeight) {
@@ -124,7 +124,7 @@ let CardView = class {
     var name = this.speaker.name
     var talk = this.speaker.talk
     var twitter = this.speaker.twitter
-    var picture = this.speaker.picture
+    var picture = this.speaker.profilePicture()
     var canvas = this._canvas()
     var context = canvas.getContext("2d");
 
