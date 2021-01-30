@@ -93,7 +93,7 @@ let CardView = class {
     var y = parseInt(this.speaker.startTimesY)
     context.font = fontSize + ' Comfortaa';
     context.fillStyle = this.cfpDayYellow
-    context.fillText("Sat 23rd Jan 2021", leftPadding, y);
+    context.fillText("Sat 20th Feb 2021", leftPadding, y);
     context.fillStyle = "white"
 
     var timingLeftPadding = leftPadding + 85
