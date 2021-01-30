@@ -229,6 +229,7 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" rel="stylesheet" />
     <script type="text/javascript">
       $(document).ready(function() {
+
         function setupFormListeners(speaker) {
           $( "#name" ).change(function(event) {
             speaker.setName(event.target.value)
@@ -290,6 +291,75 @@
 
         }
 
+        function updateSpeakerFromURLParams(speaker, startTimes) {
+          var params = new URLSearchParams(document.location.search.substring(1))
+
+          var continent = params.get("continent")
+          if(continent != null)
+            speaker.setContinent(continent)
+
+          speaker.startTimes = startTimes(continent)
+
+
+          var name = params.get("name")
+          if(name != null)
+            speaker.setName(name)
+
+          var twitter = params.get("twitter")
+          if(twitter != null)
+            speaker.setTwitter(twitter)
+
+          var talk = params.get("talk")
+          if(talk != null)
+            speaker.setTalk(talk)
+        }
+
+        function startTimes(continent) {
+          var defaultStartTime = [
+            "- 09:01 AAA",
+            "- 12:00 BBB"
+          ]
+
+          config = {
+            "Australia / Oceania":  [
+              "- 08:00 AWST",
+              "- 11:00 AEDT",
+              "- 13:00 NZDT"
+            ],
+            "Asia":  [
+              "- 09:30 IST",
+              "- 12:00 SST",
+              "- 13:00 JST"
+            ],
+            "Africa":  [
+              "- 09:00 GMT",
+              "- 12:00 EAT"
+            ],
+            "Europe":  [
+              "- 09:00 GMT",
+              "- 10:00 CET",
+              "- 12:00 MSK"
+            ],
+            "South America":  [
+              "- 10:00 PET",
+              "- 11:00 BOT",
+              "- 12:00 ART"
+            ],
+            "North America":  [
+              "- 07:00 HAST",
+              "- 09:00 PST",
+              "- 12:00 EST"
+            ]
+          }
+
+          var result = config[continent]
+          if(result == null) {
+            return defaultStartTime
+          } else {
+            return result;
+          }
+        }
+
         if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
           alert('The File APIs are not fully supported in this browser.');
         } else {
@@ -316,6 +386,8 @@
         let speaker = new Speaker()
         let cardView = new CardView(speaker)
         setupFormListeners(speaker)
+
+        updateSpeakerFromURLParams(speaker, startTimes)
       })
     </script>
   </body>
