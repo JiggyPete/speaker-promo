@@ -44,7 +44,7 @@
 
     Right click on the image below and select "Save As"
     <br/>
-    <canvas id="myCanvas" width="800" height="550" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
     <br/>
     <br/>
     <table>
@@ -123,14 +123,14 @@
           <label>X:</label>
         </td>
         <td class="input-column">
-          <input id="name--x" type="NUMBER" min="0" step="1" value="450" size="6">
+          <input id="name--x" type="NUMBER" min="0" step="1" value="410" size="6">
         </td>
       <tr>
         <td class="label-column">
           <label>Y:</label>
         </td>
         <td class="input-column">
-          <input id="name--y" type="NUMBER" min="0" step="1" value="90" size="6">
+          <input id="name--y" type="NUMBER" min="0" step="1" value="70" size="6">
         </td>
       </tr>
     </table>
@@ -152,14 +152,14 @@
           <label>X:</label>
         </td>
         <td class="input-column">
-          <input id="twitter--x" type="NUMBER" min="0" step="1" value="450" size="6">
+          <input id="twitter--x" type="NUMBER" min="0" step="1" value="410" size="6">
         </td>
       <tr>
         <td class="label-column">
           <label>Y:</label>
         </td>
         <td class="input-column">
-          <input id="twitter--y" type="NUMBER" min="0" step="1" value="130" size="6">
+          <input id="twitter--y" type="NUMBER" min="0" step="1" value="110" size="6">
         </td>
       </tr>
     </table>
@@ -180,7 +180,7 @@
           <label>X:</label>
         </td>
         <td class="input-column">
-          <input id="talk--x" type="NUMBER" min="0" step="1" value="450" size="6">
+          <input id="talk--x" type="NUMBER" min="0" step="1" value="410" size="6">
         </td>
       <tr>
         <td class="label-column">
@@ -209,14 +209,14 @@
           <label>X:</label>
         </td>
         <td class="input-column">
-          <input id="start-times--x" type="NUMBER" min="0" step="1" value="530" size="6">
+          <input id="start-times--x" type="NUMBER" min="0" step="1" value="550" size="6">
         </td>
       <tr>
         <td class="label-column">
           <label>Y:</label>
         </td>
         <td class="input-column">
-          <input id="start-times--y" type="NUMBER" min="0" step="1" value="330" size="6">
+          <input id="start-times--y" type="NUMBER" min="0" step="1" value="300" size="6">
         </td>
       </tr>
     </table>
@@ -387,10 +387,11 @@
         }
 
         let speaker = new Speaker()
-        let cardView = new CardView(speaker)
         setupFormListeners(speaker)
-
         updateSpeakerFromURLParams(speaker, startTimes)
+
+        let cardView = new CardView(speaker)
+
       })
     </script>
   </body>

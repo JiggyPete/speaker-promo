@@ -14,15 +14,35 @@ let CardView = class {
     this._redrawView()
   }
 
+  _roundedImage(context, x, y, width, height, radius) {
+    context.beginPath();
+    context.moveTo(x + radius, y);
+    context.lineTo(x + width - radius, y);
+    context.quadraticCurveTo(x + width, y, x + width, y + radius);
+    context.lineTo(x + width, y + height - radius);
+    context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    context.lineTo(x + radius, y + height);
+    context.quadraticCurveTo(x, y + height, x, y + height - radius);
+    context.lineTo(x, y + radius);
+    context.quadraticCurveTo(x, y, x + radius, y);
+    context.closePath();
+  }
+
   _drawPicture(filename, x, y, width, height, context) {
     if(filename == null || filename == "") {
       return
     }
 
     var img = new Image();
+    var roundedImage = this._roundedImage
     img.onload = function(){
         context.imageSmoothingEnabled = true;
+
+        context.save()
+        roundedImage(context, x, y, width, height, 10)
+        context.clip()
         context.drawImage(img, x, y, width, height);
+        context.restore();
     }
     img.src = filename
   }
@@ -38,7 +58,7 @@ let CardView = class {
     for(var n = 0; n < words.length; n++) {
       var testLine = line + words[n] + ' ';
       var metrics = context.measureText(testLine);
-      var testWidth = metrics.width;
+      var testWidth = metrics.width - 80;
       if (testWidth > maxWidth && n > 0) {
         context.fillText(line, x, y);
         line = words[n] + ' ';
@@ -96,7 +116,7 @@ let CardView = class {
     context.fillText("Sat 20th Feb 2021", leftPadding, y);
     context.fillStyle = "white"
 
-    var timingLeftPadding = leftPadding + 85
+    var timingLeftPadding = leftPadding + 92
     var startTimes = this.speaker.startTimes.concat(["", "", "", ""])
 
     context.fillText(startTimes[0], timingLeftPadding, this._calculateYStartTimeFor(y, 0, fontSize) );
@@ -108,12 +128,11 @@ let CardView = class {
   _drawFooter(canvas, context) {
     context.font = '25px Comfortaa';
     context.fillStyle = this.cfpDayYellow
-    context.fillText("global diversity CFP day", 40, 460);
-    context.fillText("@gdcfpday", 600, 500);
+    context.fillText("global diversity CFP day", 30, 425);
+    context.fillText("@gdcfpday", 620, 470);
 
     context.font = '25px Comfortaa';
-    context.fillText(this.speaker.continent, 40, 500);
-
+    context.fillText(this.speaker.continent, 30, 470);
   }
 
   _canvas() {
@@ -131,12 +150,12 @@ let CardView = class {
     context.fillStyle = this.backgroundColour
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    this._drawPicture(picture, 0, 0, 400, 400, context)
     this._drawName(name, context)
     this._drawTwitter(twitter, context)
     this._drawTalk(talk, context)
     this._drawTiming(context)
     this._drawFooter(canvas, context)
+    this._drawPicture(picture, 30, 30, 350, 350, context)
   }
 
 }

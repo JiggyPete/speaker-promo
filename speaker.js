@@ -8,8 +8,8 @@ let Speaker = class {
       this.name = name;
     }
     this.nameFontSize = "40px"
-    this.nameX = "450"
-    this.nameY = "90"
+    this.nameX = "410"
+    this.nameY = "70"
 
     if(this.talk == undefined) {
       this.talk = "Talk title here"
@@ -17,7 +17,7 @@ let Speaker = class {
       this.talk = talk;
     }
     this.talkFontSize = "23px"
-    this.talkX = "450"
+    this.talkX = "410"
     this.talkY = "200"
 
     if(this.twitter == undefined) {
@@ -26,8 +26,8 @@ let Speaker = class {
       this.twitter = twitter;
     }
     this.twitterFontSize = "25px"
-    this.twitterX = "450"
-    this.twitterY = "130"
+    this.twitterX = "410"
+    this.twitterY = "110"
 
     this.continent = "Australia / Oceania"
 
@@ -36,8 +36,8 @@ let Speaker = class {
       "- 12:00 BBB"
     ]
     this.startTimesFontSize = "25px"
-    this.startTimesX = "530"
-    this.startTimesY = "330"
+    this.startTimesX = "550"
+    this.startTimesY = "300"
 
 
     if(this.picture == undefined)
