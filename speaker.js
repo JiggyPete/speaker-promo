@@ -16,7 +16,7 @@ let Speaker = class {
     } else {
       this.talk = talk;
     }
-    this.talkFontSize = "20px"
+    this.talkFontSize = "23px"
     this.talkX = "450"
     this.talkY = "200"
 

@@ -72,7 +72,7 @@ let CardView = class {
 
   _drawTalk(talk, context) {
     var maxWidth = 300;
-    var lineHeight = 25;
+    var lineHeight = 30;
 
     var x = parseInt(this.speaker.talkX)
     var y = parseInt(this.speaker.talkY)
