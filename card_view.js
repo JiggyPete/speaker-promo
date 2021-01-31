@@ -5,10 +5,10 @@ let CardView = class {
 
     this.cfpDayYellow = "#FFFF80";
     this.black = "#26353F"
-    this.backgroundColour = this.black;
 
-    this.primaryTextColour = this.cfpDayYellow
-    this.secondaryTextColour = "white"
+    this.backgroundColour = this.cfpDayYellow
+    this.primaryTextColour = this.black;
+    this.secondaryTextColour = "dimgrey"
 
     this.rhsLeftPadding = 450;
 
@@ -103,7 +103,7 @@ let CardView = class {
     var y = parseInt(this.speaker.talkY)
 
     context.font = this.speaker.talkFontSize + ' Comfortaa';
-    context.fillStyle = this.secondaryTextColour
+    context.fillStyle = this.primaryTextColour;
 
     this._wrapText(context, talk, x, y, maxWidth, lineHeight);
   }
@@ -117,7 +117,7 @@ let CardView = class {
     var leftPadding = parseInt(this.speaker.startTimesX)
     var y = parseInt(this.speaker.startTimesY)
     context.font = fontSize + ' Comfortaa';
-    context.fillStyle = this.primaryTextColour
+    context.fillStyle = this.secondaryTextColour
     context.fillText("Sat 20th Feb 2021", leftPadding, y);
     context.fillStyle = this.secondaryTextColour
 
